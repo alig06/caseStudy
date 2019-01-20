@@ -16,7 +16,7 @@ class TrendyolTest:
         self.userName = config.userData['mail']
         self.password = config.userData['pass']
         logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO)
-
+   
     def runWebDriver(self, driver):
         self.driver = driver
         if self.driver == config.chromeDriver:
@@ -27,8 +27,7 @@ class TrendyolTest:
             self.driver = webdriver.Firefox(executable_path=config.firefoxExecutablePath)
             self.wait = WebDriverWait(self.driver, 20)
             self.driver.maximize_window()
-
-
+            
         else:
             logging.info("Config value error, no browser selected to be run.")
 
@@ -44,7 +43,7 @@ class TrendyolTest:
         except:
             logging.warning('Fail Gone')
             self.finishCase()
-
+    # Gender Popup in main page
     def closePopUp(self):
         popupClose = self.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, '.fancybox-close')))
         popupClose.click()
@@ -115,13 +114,13 @@ class TrendyolTest:
             self.checkCurrentUrl(config.baseUrl + config.tabPaths[0])
             config.tabPaths.pop(0)
 
-    #Take the url in element
+    # Take the url in element
     def takeUrl(self, cssSelector):
         randomBoutique = self.driver.find_element_by_css_selector(cssSelector)
         self.urlPathBoutique = str(randomBoutique.get_attribute('href'))
         randomBoutique.click()
         self.checkCurrentUrl(self.urlPathBoutique)
-
+    # Go random boutique
     def checkRandomBoutiqueImages(self):
         self.waitForLoadPage()
         self.takeUrl('.boutique-large-list-tmpl-result.row > div:first-child > div.butik-large-image > a')
@@ -133,8 +132,8 @@ class TrendyolTest:
         self.takeUrl('#root > div > ul > li:nth-child(1) > div > a')
         self.waitForLoadPage()
         self.driver.find_element_by_id('addToBasketButton').click()
+        
         # Choose variant
-
         if self.driver.find_element_by_css_selector('.product-detail-overlay').is_displayed():
             self.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, '[data-original-index="1"]'))).click()
 
