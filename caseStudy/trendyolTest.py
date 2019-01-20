@@ -75,10 +75,10 @@ class TrendyolTest:
         loginButton.click()
 
         loginMail = self.wait.until(EC.visibility_of_element_located((By.ID, 'email')))
-        loginMail.send_keys(config.userData['mail'])
+        loginMail.send_keys(self.userName)
 
         loginPass = self.wait.until(EC.visibility_of_element_located((By.ID, 'password')))
-        loginPass.send_keys(config.userData['pass'])
+        loginPass.send_keys(self.password)
 
         loginSubmit = self.wait.until(EC.visibility_of_element_located((By.ID, 'loginSubmit')))
         loginSubmit.click()
